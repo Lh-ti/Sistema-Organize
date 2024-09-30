@@ -33,8 +33,7 @@ def cadastrar_funcionario():
         try:
             id = int(id)
             salario = float(salario)
-            cargo = float(cargo)
-
+            
             if aceita_termos:
                 # Verifica se o ID é único
                 if any(funcionario[0] == id for funcionario in funcionarios_cadastrados):
@@ -75,12 +74,12 @@ label_nome.grid(row=1, column=0, padx=10, pady=5, sticky='e')
 entry_nome = tk.Entry(janela)
 entry_nome.grid(row=1, column=1, padx=10, pady=5)
 
-label_cargo = tk.Label(janela, text="Descrição:")
+label_cargo = tk.Label(janela, text="Cargo:")
 label_cargo.grid(row=2, column=0, padx=10, pady=5, sticky='e')
 entry_cargo = tk.Entry(janela)
 entry_cargo.grid(row=2, column=1, padx=10, pady=5)
 
-label_departamento = tk.Label(janela, text="departamento:")
+label_departamento = tk.Label(janela, text="Departamento:")
 label_departamento.grid(row=3, column=0, padx=10, pady=5, sticky='e')
 entry_departamento = tk.Entry(janela)
 entry_departamento.grid(row=3, column=1, padx=10, pady=5)
