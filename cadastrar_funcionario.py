@@ -94,6 +94,6 @@ check_termos = tk.Checkbutton(janela, text="Aceito os Termos de Serviço", varia
 check_termos.grid(row=5, columnspan=2, pady=10)
 
 botao_salvar = tk.Button(janela, text="Salvar", command=cadastrar_funcionario)
-botao_salvar.grid(row=6, columnspan=2, pady=10)
+botao_salvar.grid(row=6, columnspan=2, pady=11)
 
 janela.mainloop()
