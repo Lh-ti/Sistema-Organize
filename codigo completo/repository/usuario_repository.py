@@ -13,7 +13,7 @@ class UsuarioRepository:
     def salvar_usuario(self, usuario):
         with self.connection.cursor() as cursor:
             insert_query = sql.SQL("""
-                INSERT INTO usuario (nome, idade, profissao, cidade, genero, email, senha)
+                INSERT INTO usuarios (nome, idade, profissao, cidade, genero, email, senha)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
             """)
             cursor.execute(insert_query, (usuario.nome, usuario.idade, usuario.profissao,
@@ -25,7 +25,7 @@ class UsuarioRepository:
         with self.connection.cursor() as cursor:
             select_query = sql.SQL("""
                 SELECT id, nome, idade, profissao, cidade, genero, email, senha
-                FROM usuario
+                FROM usuarios
                 WHERE email = %s
             """)
             cursor.execute(select_query, (email,))
@@ -37,7 +37,7 @@ class UsuarioRepository:
     def listar_usuarios(self):
         usuarios = []
         with self.connection.cursor() as cursor:
-            select_query = sql.SQL("SELECT * FROM usuario")
+            select_query = sql.SQL("SELECT * FROM usuarios")
             cursor.execute(select_query)
             for row in cursor.fetchall():
                 usuarios.append(Usuario(*row))
@@ -45,6 +45,6 @@ class UsuarioRepository:
 
     def deletar_usuario(self, usuario_id):
         with self.connection.cursor() as cursor:
-            delete_query = sql.SQL("DELETE FROM usuario WHERE id = %s")
+            delete_query = sql.SQL("DELETE FROM usuarios WHERE id = %s")
             cursor.execute(delete_query, (usuario_id,))
             self.connection.commit()
