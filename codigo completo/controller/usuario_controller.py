@@ -16,7 +16,7 @@ class UsuarioController:
 
     def listar_usuarios(self):
         return self.repository.listar_usuarios()
-
+    
     def deletar_usuario(self, usuario_id):
         self.repository.deletar_usuario(usuario_id)
 
