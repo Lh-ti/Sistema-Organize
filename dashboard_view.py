@@ -29,7 +29,7 @@ class TelaPrincipal:
         logo = tk.Label(logo_frame, text="Organize", font=("Arial", 20, "bold"), fg=self.branco, bg=self.preto)
         logo.pack()
 
-        # Botões da barra lateral - PELAMORDI DEUS CUIDADO!!!!
+        # Botões da barra lateral
         buttons = {
             "Home": self.show_dashboard,
             "Produtos": self.show_products,
@@ -43,8 +43,8 @@ class TelaPrincipal:
         # Botão "Adicionar produto" e "Sair"
         btn_adicionar = tk.Button(self.sidebar, text="+ Adicionar produto", font=("Arial", 14), bg=self.branco, fg=self.roxo, borderwidth=0)
         btn_adicionar.pack(pady=30)
-        
-        btn_sair = tk.Button(self.sidebar, text="Sair", font=("Arial", 14), bg=self.preto, fg=self.branco, borderwidth=0)
+
+        btn_sair = tk.Button(self.sidebar, text="Sair", font=("Arial", 14), bg=self.preto, fg=self.branco, borderwidth=0, command=self.exit_application)
         btn_sair.pack(side="bottom", pady=30)
 
     def create_sidebar_button(self, text, command):
@@ -161,18 +161,27 @@ class TelaPrincipal:
     def create_categories(self):
         categorias_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=200)
         categorias_frame.grid(row=1, column=1, padx=10, pady=10)
-        title = tk.Label(categorias_frame, text="Categorias de itens principais", font=("Arial", 14), bg=self.branco)
+        title = tk.Label(categorias_frame, text="Categorias", font=("Arial", 14), bg=self.branco)
         title.pack(anchor="w", padx=10, pady=5)
-        categories_placeholder = tk.Label(categorias_frame, text="Categorias de itens", bg=self.branco, width=40, height=8)
+        categories_placeholder = tk.Label(categorias_frame, text="Gráfico de Categorias", bg=self.branco, width=40, height=8)
         categories_placeholder.pack(padx=10, pady=10)
 
     def create_stock_numbers(self):
-        numeros_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=150)
-        numeros_frame.grid(row=2, column=0, padx=10, pady=10)
-        title = tk.Label(numeros_frame, text="Números de estoque", font=("Arial", 14), bg=self.branco)
+        numeros_estoque_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=200)
+        numeros_estoque_frame.grid(row=1, column=2, padx=10, pady=10)
+        title = tk.Label(numeros_estoque_frame, text="Números do Estoque", font=("Arial", 14), bg=self.branco)
         title.pack(anchor="w", padx=10, pady=5)
-        stock_placeholder = tk.Label(numeros_frame, text="Itens com estoque baixo\nCategorias de itens\nItens reembolsados", bg=self.branco, justify="left")
-        stock_placeholder.pack(padx=10, pady=10)
+        stock_numbers_placeholder = tk.Label(numeros_estoque_frame, text="Total de itens e valor", bg=self.branco, width=40, height=8)
+        stock_numbers_placeholder.pack(padx=10, pady=10)
+
+    def create_orders_frame(self):
+        pedidos_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=200)
+        pedidos_frame.grid(row=1, column=3, padx=10, pady=10)
+        title = tk.Label(pedidos_frame, text="Pedidos", font=("Arial", 14), bg=self.branco)
+        title.pack(anchor="w", padx=10, pady=5)
+        orders_placeholder = tk.Label(pedidos_frame, text="Lista de pedidos", bg=self.branco, width=40, height=8)
+        orders_placeholder.pack(padx=10, pady=10)
+
 
     def create_orders_frame(self):
         pedidos_frame = tk.Frame(self.main_frame, bg=self.branco, width=700, height=100)
@@ -185,84 +194,36 @@ class TelaPrincipal:
             pedido_num = tk.Label(pedido_frame, text=pedido_values[i], font=("Arial", 24), bg=self.branco, fg=self.roxo)
             pedido_num.pack()
             pedido_texto = tk.Label(pedido_frame, text=pedido_labels[i], font=("Arial", 12), bg=self.branco, fg=self.cinza_texto)
-            pedido_texto.pack()
-        
+            pedido_texto.pack()   
+
     def create_product_list(self):
-        products_frame = tk.Frame(self.main_frame, bg=self.branco)
-        products_frame.grid(row=1, column=3, padx=10, pady=10, sticky="nsew")
-
-        # Lista de produtos precisa colocar codigo de banco de dados
-        products = [
-            {"name": "Produto 1", "stock": 15, "price": 50.0, "image": "placeholder.png"},
-            {"name": "Produto 2", "stock": 10, "price": 30.0, "image": "placeholder.png"},
-            {"name": "Produto 3", "stock": 5, "price": 45.0, "image": "placeholder.png"},
-            {"name": "Produto 4", "stock": 8, "price": 60.0, "image": "placeholder.png"},
-            {"name": "Produto 5", "stock": 12, "price": 20.0, "image": "placeholder.png"},
-            {"name": "Produto 6", "stock": 7, "price": 35.0, "image": "placeholder.png"},
-            {"name": "Produto 7", "stock": 3, "price": 15.0, "image": "placeholder.png"},
-            {"name": "Produto 8", "stock": 9, "price": 70.0, "image": "placeholder.png"},
-        ]
-
-        # Grid com 4 por linha e 2 por coluna
-        max_columns = 4  # Máximo de 4 produtos por linha
-        row = 0
-        col = 0
-
-        for index, product in enumerate(products):
-            product_frame = tk.Frame(products_frame, bg=self.branco, bd=2, relief="solid", padx=10, pady=10)
-            product_frame.grid(row=row, column=col, padx=10, pady=10, sticky="nsew")
-
-            image = tk.Label(product_frame, text="📦", bg=self.branco, width=10, height=5)
-            image.grid(row=0, column=0, padx=10, pady=10)
-
-            name_label = tk.Label(product_frame, text=product["name"], font=("Arial", 14), bg=self.branco)
-            name_label.grid(row=1, column=0, padx=10)
-
-            stock_price_label = tk.Label(product_frame, text=f"Estoque: {product['stock']} - R$ {product['price']:.2f}", bg=self.branco)
-            stock_price_label.grid(row=2, column=0, padx=10)
-
-            btn_info = tk.Button(product_frame, text="Mais Informações", bg=self.roxo, fg=self.branco)
-            btn_info.grid(row=3, column=0, padx=10)
-
-            btn_add_cart = tk.Button(product_frame, text="Adicionar ao Carrinho", bg=self.roxo, fg=self.branco)
-            btn_add_cart.grid(row=4, column=0, padx=10)
-
-            col += 1
-            if col == max_columns:
-                col = 0
-                row += 1
+        # Exemplo de listagem de produtos
+        product_list_frame = tk.Frame(self.main_frame, bg=self.branco)
+        product_list_frame.grid(row=1, column=0, padx=10, pady=10)
+        title = tk.Label(product_list_frame, text="Lista de Produtos", font=("Arial", 14), bg=self.branco)
+        title.pack(anchor="w", padx=10, pady=5)
+        products = ["Produto A", "Produto B", "Produto C"]
+        for product in products:
+            product_label = tk.Label(product_list_frame, text=product, bg=self.branco)
+            product_label.pack(anchor="w", padx=10)
 
     def create_sellers_list(self):
-        sellers_frame = tk.Frame(self.main_frame, bg=self.cinza_claro, width=700)
-        sellers_frame.grid(row=1, column=0, padx=200, pady=10, sticky="nsew")
-        
-        sellers = [
-            {"name": "Vendedor 1", "id": "001"},
-            {"name": "Vendedor 2", "id": "002"},
-            {"name": "Vendedor 3", "id": "003"},
-        ]
-
+        # Exemplo de listagem de vendedores
+        sellers_frame = tk.Frame(self.main_frame, bg=self.branco)
+        sellers_frame.grid(row=1, column=0, padx=10, pady=10)
+        title = tk.Label(sellers_frame, text="Lista de Vendedores", font=("Arial", 14), bg=self.branco)
+        title.pack(anchor="w", padx=10, pady=5)
+        sellers = ["Vendedor A", "Vendedor B", "Vendedor C"]
         for seller in sellers:
-            # Card para cada vendedor - CUIDADO AO MEXER!!!!!!!
-            seller_frame = tk.Frame(sellers_frame, bg=self.branco, bd=2, relief="groove", padx=20, pady=10)
-            seller_frame.pack(padx=10, pady=10, fill="x")
+            seller_label = tk.Label(sellers_frame, text=seller, bg=self.branco)
+            seller_label.pack(anchor="w", padx=10)
 
-            name_label = tk.Label(seller_frame, text=seller["name"], font=("Arial", 16, "bold"), bg=self.branco, fg=self.roxo)
-            name_label.grid(row=0, column=0, padx=10, sticky="w")
-
-            id_label = tk.Label(seller_frame, text=f"ID: {seller['id']}", font=("Arial", 12), bg=self.branco, fg=self.cinza_texto)
-            id_label.grid(row=1, column=0, padx=10, sticky="w")
-
-            label = tk.Button(seller_frame, text="|", bg="white", fg="white",borderwidth=0)
-            label.grid(row=0, column=1, padx=200, sticky="e")
-
-            btn_editar = tk.Button(seller_frame, text="📝", bg=self.cinza_claro, fg="blue", borderwidth=0, font=("Arial", 12))
-            btn_editar.grid(row=0, column=1, padx=10, sticky="e")
-
-            btn_delete = tk.Button(seller_frame, text="🗑️", bg="red", fg=self.branco, borderwidth=0, font=("Arial", 12))
-            btn_delete.grid(row=0, column=2, padx=10, sticky="e")
+    def exit_application(self):
+        self.root.destroy()
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = TelaPrincipal(root)
     root.mainloop()
+
+
