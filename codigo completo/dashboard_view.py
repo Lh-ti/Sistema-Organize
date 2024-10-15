@@ -161,9 +161,9 @@ class TelaPrincipal:
     def create_categories(self):
         categorias_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=200)
         categorias_frame.grid(row=1, column=1, padx=10, pady=10)
-t       title = tk.Label(categorias_frame, text="Categorias", font=("Arial", 14), bg=self.branco)
+        title = tk.Label(categorias_frame, text="Categorias", font=("Arial", 14), bg=self.branco)
         title.pack(anchor="w", padx=10, pady=5)
-        categories_placeholder = tk.Label(categorias_frame, text="Categorias de itens", bg=self.branco, width=40, height=8)
+        categories_placeholder = tk.Label(categorias_frame, text="Gráfico de Categorias", bg=self.branco, width=40, height=8)
         categories_placeholder.pack(padx=10, pady=10)
 
     def create_stock_numbers(self):
@@ -173,6 +173,14 @@ t       title = tk.Label(categorias_frame, text="Categorias", font=("Arial", 14)
         title.pack(anchor="w", padx=10, pady=5)
         stock_numbers_placeholder = tk.Label(numeros_estoque_frame, text="Total de itens e valor", bg=self.branco, width=40, height=8)
         stock_numbers_placeholder.pack(padx=10, pady=10)
+
+    def create_orders_frame(self):
+        pedidos_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=200)
+        pedidos_frame.grid(row=1, column=3, padx=10, pady=10)
+        title = tk.Label(pedidos_frame, text="Pedidos", font=("Arial", 14), bg=self.branco)
+        title.pack(anchor="w", padx=10, pady=5)
+        orders_placeholder = tk.Label(pedidos_frame, text="Lista de pedidos", bg=self.branco, width=40, height=8)
+        orders_placeholder.pack(padx=10, pady=10
 
     def create_orders_frame(self):
         pedidos_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=200)
