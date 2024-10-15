@@ -29,7 +29,7 @@ class TelaPrincipal:
         logo = tk.Label(logo_frame, text="Organize", font=("Arial", 20, "bold"), fg=self.branco, bg=self.preto)
         logo.pack()
 
-        # Botões da barra lateral - PELAMORDI DEUS CUIDADO!!!!
+        # Botões da barra lateral
         buttons = {
             "Home": self.show_dashboard,
             "Produtos": self.show_products,
@@ -43,8 +43,8 @@ class TelaPrincipal:
         # Botão "Adicionar produto" e "Sair"
         btn_adicionar = tk.Button(self.sidebar, text="+ Adicionar produto", font=("Arial", 14), bg=self.branco, fg=self.roxo, borderwidth=0)
         btn_adicionar.pack(pady=30)
-        
-        btn_sair = tk.Button(self.sidebar, text="Sair", font=("Arial", 14), bg=self.preto, fg=self.branco, borderwidth=0)
+
+        btn_sair = tk.Button(self.sidebar, text="Sair", font=("Arial", 14), bg=self.preto, fg=self.branco, borderwidth=0, command=self.exit_application)
         btn_sair.pack(side="bottom", pady=30)
 
     def create_sidebar_button(self, text, command):
@@ -161,18 +161,26 @@ class TelaPrincipal:
     def create_categories(self):
         categorias_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=200)
         categorias_frame.grid(row=1, column=1, padx=10, pady=10)
-        title = tk.Label(categorias_frame, text="Categorias de itens principais", font=("Arial", 14), bg=self.branco)
+t       title = tk.Label(categorias_frame, text="Categorias", font=("Arial", 14), bg=self.branco)
         title.pack(anchor="w", padx=10, pady=5)
         categories_placeholder = tk.Label(categorias_frame, text="Categorias de itens", bg=self.branco, width=40, height=8)
         categories_placeholder.pack(padx=10, pady=10)
 
     def create_stock_numbers(self):
-        numeros_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=150)
-        numeros_frame.grid(row=2, column=0, padx=10, pady=10)
-        title = tk.Label(numeros_frame, text="Números de estoque", font=("Arial", 14), bg=self.branco)
+        numeros_estoque_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=200)
+        numeros_estoque_frame.grid(row=1, column=2, padx=10, pady=10)
+        title = tk.Label(numeros_estoque_frame, text="Números do Estoque", font=("Arial", 14), bg=self.branco)
         title.pack(anchor="w", padx=10, pady=5)
-        stock_placeholder = tk.Label(numeros_frame, text="Itens com estoque baixo\nCategorias de itens\nItens reembolsados", bg=self.branco, justify="left")
-        stock_placeholder.pack(padx=10, pady=10)
+        stock_numbers_placeholder = tk.Label(numeros_estoque_frame, text="Total de itens e valor", bg=self.branco, width=40, height=8)
+        stock_numbers_placeholder.pack(padx=10, pady=10)
+
+    def create_orders_frame(self):
+        pedidos_frame = tk.Frame(self.main_frame, bg=self.branco, width=350, height=200)
+        pedidos_frame.grid(row=1, column=3, padx=10, pady=10)
+        title = tk.Label(pedidos_frame, text="Pedidos", font=("Arial", 14), bg=self.branco)
+        title.pack(anchor="w", padx=10, pady=5)
+        orders_placeholder = tk.Label(pedidos_frame, text="Lista de pedidos", bg=self.branco, width=40, height=8)
+        orders_placeholder.pack(padx=10, pady=10)
 
     def create_orders_frame(self):
         pedidos_frame = tk.Frame(self.main_frame, bg=self.branco, width=700, height=100)
